@@ -1,0 +1,19 @@
+.img-carrusel {
+    height: 9rem;
+    object-fit: cover;
+}
+
+.img-card {
+    height: 190px;
+}
+.text-cards {
+    height: 72px;
+}
+.section-checks {
+    height: 4rem;
+}
+.div-form {
+    width: 50rem !important;
+    height: 27rem;
+    margin-top: 5rem;
+}
