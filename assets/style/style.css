@@ -17,3 +17,29 @@
     height: 27rem;
     margin-top: 5rem;
 }
+table {
+    border-collapse: collapse;
+    width: 90%;
+}
+th, td {
+    border: 1px solid black !important;
+    padding: 8px !important;
+    text-align: left;
+    height: 40.8px;
+}
+th {
+    background-color: #f2f2f2;
+}
+.main-tabla {
+    display: flex;
+    justify-content: center;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+@media (min-width: 320px) {
+    .check-box {
+        display: flex;
+        flex-wrap: wrap;
+        min-height: 8rem;
+    }
+}   
