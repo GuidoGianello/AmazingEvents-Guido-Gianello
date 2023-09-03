@@ -36,6 +36,14 @@ th {
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
+.main-details {
+    min-height: 51vh;
+    margin-top: 3rem;
+    margin-bottom: 3rem;
+}
+.img-details {
+    height: 100% !important;
+}
 @media (min-width: 320px) {
     .check-box {
         display: flex;
