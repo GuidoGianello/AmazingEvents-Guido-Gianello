@@ -44,6 +44,10 @@ th {
 .img-details {
     height: 100% !important;
 }
+#contenedor-card{
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+}
 @media (min-width: 320px) {
     .check-box {
         display: flex;
