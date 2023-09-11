@@ -1,50 +1,94 @@
-let eventosFiltrados = []
-function filtraFechas(fecha, arrayEventos) {
-    for(let i = 0; i < arrayEventos.length; i++) {
-        const evento = arrayEventos[i]
-        if(evento.date >= fecha) {
-            eventosFiltrados.push(evento)
-        }
-    }
-}
+const contenedor = document.getElementById("contenedor-card")
+const contenedorCheck = document.getElementById("section-categorias")
+const inputSearch = document.getElementById("search-bar")
 
-filtraFechas(data.currentDate, data.events)
-console.log(eventosFiltrados)
-console.log(data)
-
-function generaCard(evento) {
-    return `<div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center pt-2 pb-2">
-    <div class="card" style="width: 18rem; height: 24rem;">
-      <img src="${evento.image}" class="card-img-top img-card" alt="platos-comida">
-      <div class="card-body">
-        <h5 class="card-title text-center">${evento.name}</h5>
-        <p class="card-text text-center">${evento.description}</p>
-        <div class="d-flex justify-content-between">
-          <p class="card-text">Price: ${evento.price}$</p>
-          <a href="../pages/details.html" class="btn btn-primary">Details</a>
-        </div>
+function creaCard(evento) {
+  return `<div class="col-12 col-md-6 col-xl-3 d-flex justify-content-center pt-2 pb-2">
+  <div class="card" style="width: 18rem; height: 24rem;">
+    <img src="${evento.image}" class="card-img-top img-card" alt="platos-comida">
+    <div class="card-body">
+      <h5 class="card-title text-center">${evento.name}</h5>
+      <p class="card-text text-center">${evento.description}</p>
+      <div class="d-flex justify-content-between">
+        <p class="card-text">Price: ${evento.price}$</p>
+        <a href="./assets/pages/details.html" class="btn btn-primary">Details</a>
       </div>
     </div>
-  </div>`
+  </div>
+</div>`
 }
 
-let template = ""
-function creaTemplate(arrayFiltrado) {
-    for(let evento of arrayFiltrado) {
-        template += generaCard(evento)
-    } return template
+const categoriasEventos = filtroCategorias(data.events);
+function creaCheck(categoria) {
+  return `<label for="${categoria}">${categoria}</label>
+    <input type="checkbox" id="${categoria}" value="${categoria}">
+    `
 }
 
+function conjuntoCheck(listaEventos) {
+  let todosCheck = listaEventos
+    .map((categoria) => creaCheck(categoria))
+    .join(` `)
+  return todosCheck
+}
+const todosCheck = conjuntoCheck(categoriasEventos)
 
+function imprimirCards(array, contenedor) {
+  let template = ""
+  if (array == 0) {
+    template = "No results found"
+  }
+  for (let info of array) {
+    template += creaCard(info)
+  }
+  contenedor.innerHTML = template
+}
 
-let templateFinal = creaTemplate(eventosFiltrados)
+function imprimeCheck(template, contenedor) {
+  contenedor.innerHTML = template
+}
+imprimeCheck(todosCheck, contenedorCheck)
 
-const contenedor = document.getElementById("contenedor-card")
+inputSearch.addEventListener("input", () => {
+  filterCheckSearch()
+})
 
- function pusheaCard(formatoCard, contenedor) {
-     contenedor.innerHTML = formatoCard
- }
- pusheaCard(templateFinal, contenedor)
+contenedorCheck.addEventListener("change", () => {
+  filterCheckSearch()
+})
 
- console.log(eventosFiltrados)
- console.log(creaTemplate(eventosFiltrados))
+function filtraEventosUp(fechaReferencia, listaEventos) {
+  let eventosFiltrados = listaEventos.filter(
+    (evento) => evento.date >= fechaReferencia
+  )
+  return eventosFiltrados
+}
+const eventosFiltrados = filtraEventosUp(data.currentDate, data.events)
+
+function filtroCategorias(listaEventos) {
+  let categorias = listaEventos.map((evento) => evento.category)
+  let categoriasEventos = [...new Set(categorias)]
+  return categoriasEventos
+}
+
+function filterSearch(array, inputValue) {
+  return array.filter((evento) =>
+    evento.name.toLowerCase().includes(inputValue.toLowerCase())
+  )
+}
+
+function filtercheck(array, categorias) {
+  return array.filter(
+    (evento) => categorias.includes(evento.category) || categorias.length == 0
+  )
+}
+
+function filterCheckSearch() {
+  let checked = Array.from(
+    document.querySelectorAll(`input[type="checkbox"]:checked`)
+  ).map((elemento) => elemento.value)
+  let filtrosearch = filterSearch(data.events, inputSearch.value)  // En up y past es eventosFiltrados mirar linea 58
+  let filtrocheck = filtercheck(filtrosearch, checked)
+  imprimirCards(filtrocheck, contenedor)
+}
+filterCheckSearch()
