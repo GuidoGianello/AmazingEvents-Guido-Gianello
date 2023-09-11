@@ -11,7 +11,7 @@ function creaCard(evento) {
       <p class="card-text text-center">${evento.description}</p>
       <div class="d-flex justify-content-between">
         <p class="card-text">Price: ${evento.price}$</p>
-        <a href="./assets/pages/details.html" class="btn btn-primary">Details</a>
+        <a href="./assets/pages/details.html?parametro=${evento._id}" class="btn btn-primary">Details</a>
       </div>
     </div>
   </div>

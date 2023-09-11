@@ -11,7 +11,7 @@ function creaCard(evento) {
       <p class="card-text text-center">${evento.description}</p>
       <div class="d-flex justify-content-between">
         <p class="card-text">Price: ${evento.price}$</p>
-        <a href="./assets/pages/details.html" class="btn btn-primary">Details</a>
+        <a href="../pages/details.html?parametro=${evento._id}" class="btn btn-primary">Details</a>
       </div>
     </div>
   </div>
@@ -87,7 +87,7 @@ function filterCheckSearch() {
   let checked = Array.from(
     document.querySelectorAll(`input[type="checkbox"]:checked`)
   ).map((elemento) => elemento.value)
-  let filtrosearch = filterSearch(data.events, inputSearch.value)  // En up y past es eventosFiltrados mirar linea 58
+  let filtrosearch = filterSearch(eventosFiltrados, inputSearch.value)  
   let filtrocheck = filtercheck(filtrosearch, checked)
   imprimirCards(filtrocheck, contenedor)
 }
