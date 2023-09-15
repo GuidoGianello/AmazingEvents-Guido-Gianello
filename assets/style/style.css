@@ -24,7 +24,7 @@ table {
 th, td {
     border: 1px solid black !important;
     padding: 8px !important;
-    text-align: left;
+    text-align: center;
     height: 40.8px;
 }
 th {
@@ -32,9 +32,13 @@ th {
 }
 .main-tabla {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     padding-top: 2rem;
     padding-bottom: 2rem;
+    text-align: center;
+    align-items: center;
+    gap: 3rem;
 }
 .main-details {
     min-height: 51vh;
